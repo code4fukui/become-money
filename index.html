@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+<title>クイズ お金になる？</title>
+<link rel="apple-touch-icon" href="https://code4fukui.github.io/become-money/ogp.png">
+<meta property="og:image" content="https://code4fukui.github.io/become-money/ogp.png">
+<link rel="stylesheet" type="text/css" href="https://fukuno.jig.jp/app/opendatacity/q2js.css">
+<script src=https://fukuno.jig.jp/fukuno.js></script>
+<script src=https://fukuno.jig.jp/app/opendatacity/q2.js></script>
+
+<script type="module">
+import { CSV } from "https://js.sabae.cc/CSV.js";
+
+onload = async () => {
+	const url = "https://code4fukui.github.io/zerowaste/zerowaste_kamikatsu.csv";
+	const data = await CSV.fetchJSON(url);
+	console.log(data);
+
+	// タイトル
+	const title = "クイズ お金になる？";
+	
+	// シャッフル
+	shuffle(data);
+
+	// 問題文、正解、誤答
+	const quiz = []
+	for (let i = 0; i < Math.min(data.length, 10); i++) {
+		const d = data[i];
+		quiz.push([d.品目, "お金になる", "ならない", d.町のお金になる == 1]);
+	}
+
+	// クリアした時
+	const callback = (pnt) => {
+		alert(pnt + "問正解！ 正解率 " + Math.floor(100 * pnt / quiz.length) + "%")
+
+		// 即、ジャンプしたい場合はこちら
+//		location = "https://fukuno.jig.jp/2355"
+
+		// ダイアログ形式で尋ねたい場合はこちら
+		if (confirm("徳島県 上勝町 ゼロ・ウェイストセンターのページを見る？")) {
+			location = "https://why-kamikatsu.jp/";
+		} else if (confirm("もういちど？")) {
+			location.reload()
+		}
+	}
+	// クイズスタート
+	startQuiz(title, quiz, callback)
+}
+</script>
+</head><body>
+
+<div id=head class=theme>第1問</div>
+<div id=main>
+	<!--<div id=ind class=indcorrect></div>-->
+	<div id=ind class=indcorrect>正解</div>
+	<!--<div id=ind class=indincorrect>不正解</div>-->
+	<div id=q></div>
+	<div id=ans>
+		<div id=ans1></div>
+		<div class=correct id=ans2></div>
+	</div>
+</div>
+
+<div id=credit class=theme>
+	APP: <a href=https://github.com/code4fukui/become-money/>CC BY Code for FUKUI</a> (LIB <a href=https://fukuno.jig.jp/2752>2択framework q2.js</a>)<br>
+	DATA: CC BY <a href=https://github.com/code4fukui/zerowaste/>上勝町リサイクル分別オープンデータ</a>（<a href=https://zwtk.jp/separate/>上勝町のごみ分別</a> を元に作成）<br>
+</div>
+</body></html>

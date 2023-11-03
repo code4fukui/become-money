@@ -1,4 +1,8 @@
-# yesnoquiz　2択で答えるクイズゲームwebアプリ
+# become-money クイズ お金になる？
+
+https://code4fukui.github.io/become-money/
+
+## その他、yesnoquiz　2択で答えるクイズゲームwebアプリ
 
 - [むらorそん](https://fukuno.jig.jp/app/opendatacity/muraorson.html) ([ブログ](https://fukuno.jig.jp/2753))
 - [まちちょうか？](https://fukuno.jig.jp/app/opendatacity/machiorcho.html) ([ブログ](https://fukuno.jig.jp/2752))
